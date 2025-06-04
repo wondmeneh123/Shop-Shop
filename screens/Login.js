@@ -1,4 +1,6 @@
+// Using useState to manage the state of the input field
 import React, { useState } from "react";
+// Importing necessary libraries and components from React Native
 import {
   View,
   Text,
@@ -13,8 +15,9 @@ import {
 
 export default function LoginScreen({ navigation }) {
   const [emailOrPhone, setEmailOrPhone] = useState("");
-
+// Function to handle sending OTP after basic validation
   const handleSendOTP = () => {
+    // Trim input to remove leading/trailing spaces
     if (!emailOrPhone.trim()) {
       alert("Please enter your email or phone number.");
       return;
@@ -23,14 +26,17 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
+    // Ensures keyboard doesn't cover inputs on iOS
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={styles.container}
     >
+        // ScrollView allows the content to be scrollable, especially useful on smaller screens
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         keyboardShouldPersistTaps="handled"
       >
+          {/* Main content container */}
         <View style={styles.innerContainer}>
           {/* Header Image */}
           <Image
@@ -54,7 +60,7 @@ export default function LoginScreen({ navigation }) {
             onChangeText={setEmailOrPhone}
           />
 
-          {/* Button */}
+          {/* Button to trigger OTP */}
           <TouchableOpacity style={styles.button} onPress={handleSendOTP}>
             <Text style={styles.buttonText}>Send OTP</Text>
           </TouchableOpacity>
@@ -63,7 +69,7 @@ export default function LoginScreen({ navigation }) {
     </KeyboardAvoidingView>
   );
 }
-
+ // Styles for all UI elements
 const styles = StyleSheet.create({
   container: {
     flex: 1,
